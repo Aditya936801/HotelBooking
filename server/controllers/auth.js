@@ -33,6 +33,7 @@ export const userRegister = async(req,res)=>{
 export const userLogin = async(req,res)=>{
     try{
         const {email,password} = req.body
+        console.log(email)
         const user = await User.findOne({email:email})
         if(!user) return res.status(400).json({message:"Email is not Registered"})
 
@@ -41,7 +42,8 @@ export const userLogin = async(req,res)=>{
 
         const token = jwt.sign({id : user._id},process.env.ADMIN_JWT_SECRET)
         delete user.password
-        res.status(200).json({token,user})
+        const userDetail = {...user,isAdmin:false}
+        res.status(200).json({token,userDetail})
     }
     catch(err)
     {
@@ -61,7 +63,9 @@ export const adminLogin = async(req,res)=>{
 
         const token = jwt.sign({id : admin._id},process.env.JWT_SECRET)
         delete admin.password
-        res.status(200).json({token,admin})
+        const userDetail = {...admin,isAdmin:true}
+
+        res.status(200).json({token,userDetail})
     }
     catch(err)
     {

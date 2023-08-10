@@ -1,5 +1,5 @@
 
-const userData = (state) => {
+export const getUserData = (state) => {
     const userData = state?.auth?.user || {};
     return userData;
 }
