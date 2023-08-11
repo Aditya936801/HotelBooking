@@ -4,11 +4,13 @@ import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import { AUTH_ROUTE } from "./navigation/routes/authRoutes";
 import { APP_ROUTE } from "./navigation/routes/appRoutes";
 import UserLogin from "./pages/Login/UserLogin";
-import HomeScreen from "./pages/HomeScreen";
 import Navbar from "./components/Navbar";
+import Loader from "./components/Loader";
 import UnprotectedRoutes from "./navigation/UnprotectedRoutes";
-const HotelSearch = React.lazy(()=>import("./pages/HotelSearch"))
-
+import CustomSnackbar from "./components/CustomSnackBar";
+const HomeScreen = React.lazy(() => import("./pages/HomeScreen"));
+const HotelSearch = React.lazy(() => import("./pages/HotelSearch"));
+const BookHotel = React.lazy(() => import("./pages/BookHotel"));
 
 const App = () => {
   const theme = createTheme({
@@ -31,13 +33,37 @@ const App = () => {
               </UnprotectedRoutes>
             }
           />
-          <Route path={APP_ROUTE.searchHotel} element={<HotelSearch />} />
+         
 
           <Route element={<Navbar />}>
-            <Route path={APP_ROUTE.homeScreen} element={<HomeScreen />} />
+            <Route
+              path={APP_ROUTE.homeScreen}
+              element={
+                <Suspense fallback={<Loader/>}>
+                  <HomeScreen />  
+                </Suspense>
+              }
+            />
+            <Route
+            path={APP_ROUTE.searchHotel}
+            element={
+              <Suspense fallback={<Loader/>}>
+                <HotelSearch />
+              </Suspense>
+            }
+          />
+            <Route
+            path={APP_ROUTE.bookHotel}
+            element={
+              <Suspense fallback={<Loader/>}>
+                <BookHotel />
+              </Suspense>
+            }
+          />
           </Route>
         </Routes>
       </BrowserRouter>
+      <CustomSnackbar />
     </ThemeProvider>
   );
 };

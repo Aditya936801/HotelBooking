@@ -2,7 +2,7 @@ import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@mui/material";
 import { getToken } from "../../store/auth/authSelector";
@@ -12,20 +12,23 @@ import { Outlet } from "react-router-dom";
 import "./navbar.css"
 
 const Navbar = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
   const token = useSelector(getToken);
   const isAuth = token !== "";
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const handleLogout = () => {
     dispatch(setLogout());
   };
+
+  const handleNavigate=()=>{
+    navigate(APP_ROUTE.homeScreen)
+  }
 
   return (
     <div>
       <AppBar>
         <Toolbar>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }} onClick={handleNavigate} >
             ZBook
           </Typography>
           <div className={"nav-links"}>
@@ -44,6 +47,7 @@ const Navbar = () => {
           </div>
         </Toolbar>
       </AppBar>
+      <Toolbar/>
       <Outlet />
     </div>
   );
