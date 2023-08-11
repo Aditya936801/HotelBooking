@@ -7,7 +7,7 @@ const BookHotel = () => {
   const { state } = useLocation();
   return( <div className="book-hotel-container">
     <HotelDescription state={state} />
-    <HotelForm/>
+    <HotelForm maxRoom = {state?.maxRoom} price={state?.price} id={state?._id}  />
   </div>);
 };
 

@@ -65,7 +65,7 @@ const Form = (props) => {
           snackbar: {
             open: true,
             message: response?.data?.message,
-            severity: "error",
+            severity: "success",
           },
         })
       );
@@ -87,12 +87,13 @@ const Form = (props) => {
     
     try {
       const response = await user_login(values);
+      
       dispatch(
         setSnackbar({
           snackbar: {
             open: true,
             message: response?.data?.message,
-            severity: "error",
+            severity: "success",
           },
         })
       );

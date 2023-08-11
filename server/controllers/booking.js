@@ -3,6 +3,7 @@ import Hotel from "../models/Hotel.js";
 
 export const createBooking = async (req, res) => {
   try {
+    
     const startDate = new Date(req.body.startDate).getTime();
     const endDate = new Date(req.body.endDate).getTime();
     const bookingDetails = {

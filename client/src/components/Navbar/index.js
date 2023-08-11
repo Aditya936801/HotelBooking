@@ -28,7 +28,7 @@ const Navbar = () => {
     <div>
       <AppBar>
         <Toolbar>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }} onClick={handleNavigate} >
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1,cursor:"pointer" }} onClick={handleNavigate} >
             ZBook
           </Typography>
           <div className={"nav-links"}>

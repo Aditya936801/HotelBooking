@@ -33,6 +33,10 @@ const HotelSchema = new mongoose.Schema(
             type:String,
             required:true,
         },
+        maxRoom:{
+            type:Number,
+            required:true,
+        },
      
     },{
         timestamps:true

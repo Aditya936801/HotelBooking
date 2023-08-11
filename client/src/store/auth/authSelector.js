@@ -1,5 +1,6 @@
 
 export const getUserData = (state) => {
+    console.log(state)
     const userData = state?.auth?.user || {};
     return userData;
 }

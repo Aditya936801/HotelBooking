@@ -10,12 +10,14 @@
 .nav-link-text {
     text-decoration: none;
     color: white;
+
     &:hover {
         background-color: white;
         border-radius: 4px;
         padding: 2px 7px;
-        color: #1976d2;
         cursor: pointer;
+        color: #d2164d;
+
     }
 }
 
@@ -24,7 +26,18 @@
     background-color: white;
     border-radius: 4px;
     padding: 2px 7px;
-    color: #1976d2;
-    cursor: none;
+    color: #d2164d;
+
 }
 
+@media only screen and (max-width: 600px) {
+    .nav-links {
+        max-width: 190px;
+    }
+     
+
+    .nav-link-text {
+       font-size: 13px;
+    }
+
+}

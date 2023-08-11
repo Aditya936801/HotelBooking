@@ -11,6 +11,7 @@ import CustomSnackbar from "./components/CustomSnackBar";
 const HomeScreen = React.lazy(() => import("./pages/HomeScreen"));
 const HotelSearch = React.lazy(() => import("./pages/HotelSearch"));
 const BookHotel = React.lazy(() => import("./pages/BookHotel"));
+const MyBooking = React.lazy(() => import("./pages/MyBooking"));
 
 const App = () => {
   const theme = createTheme({
@@ -57,6 +58,14 @@ const App = () => {
             element={
               <Suspense fallback={<Loader/>}>
                 <BookHotel />
+              </Suspense>
+            }
+          />
+            <Route
+            path={APP_ROUTE.myBookings}
+            element={
+              <Suspense fallback={<Loader/>}>
+                <MyBooking />
               </Suspense>
             }
           />

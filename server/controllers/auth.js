@@ -20,7 +20,7 @@ export const userRegister = async(req,res)=>{
             userName,email,password:passwordHash
         })
         const savedUser = await user.save() 
-        res.status(201).json(savedUser)
+        res.status(201).json({savedUser,message:"Registration Successful"})
 
     }
     catch(err)
@@ -42,12 +42,13 @@ export const userLogin = async(req,res)=>{
 
         const token = jwt.sign({id : user._id},process.env.ADMIN_JWT_SECRET)
         delete user.password
-        const userDetail = {...user,isAdmin:false}
-        res.status(200).json({token,userDetail})
+     
+      
+        res.status(200).json({token,user,message:"Login Successful"})
     }
     catch(err)
     {
-        res.status(500).json({message:"Something went wrong"})
+        res.status(500).json({message:"Something went wrong",error:err.message})
 
     }
 
@@ -65,11 +66,11 @@ export const adminLogin = async(req,res)=>{
         delete admin.password
         const userDetail = {...admin,isAdmin:true}
 
-        res.status(200).json({token,userDetail})
+        res.status(200).json({token,userDetail,message:"Login Successful"})
     }
     catch(err)
     {
-        res.status(500).json({message:"Something went wrong"})
+        res.status(500).json({message:"Something went wrong",error:err.message})
 
     }
 

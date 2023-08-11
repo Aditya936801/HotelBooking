@@ -2,5 +2,6 @@ export const APP_ROUTE = {
     homeScreen:"/home-screen",
     myBookings:"/my-bookings",
     searchHotel:"/search-hotel",
-    bookHotel:"/book-hotel"
+    bookHotel:"/book-hotel",
+    
 }
