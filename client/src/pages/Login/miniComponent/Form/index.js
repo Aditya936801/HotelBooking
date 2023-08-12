@@ -59,6 +59,7 @@ const Form = (props) => {
   const handleRegistration = async (values) => {
     try {
       const response = await user_register(values);
+      setValue(DEFAULT_FORM_DATA);
       setPageType("login")
       dispatch(
         setSnackbar({
@@ -93,7 +94,7 @@ const Form = (props) => {
       response = await user_login(values);
 
       }
-      
+      setValue(DEFAULT_FORM_DATA);
       dispatch(
         setSnackbar({
           snackbar: {
@@ -131,8 +132,8 @@ const Form = (props) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (pageType === "login") {
+      setIsLoading(true);
       handleLogin(value)
-      setValue(DEFAULT_FORM_DATA)
     } else {
       const { error, isError } = checkValidation(value);
       if (isError) {
