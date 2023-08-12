@@ -14,8 +14,6 @@ export const verifyToken = async (req, res, next) => {
     } else {
       res.status(400).json({ message: "Login Required" });
     }
-
-    next();
   } catch (err) {
     res.status(400).json({ message: "Access Denied" });
   }

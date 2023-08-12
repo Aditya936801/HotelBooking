@@ -71,11 +71,11 @@ const App = () => {
             <Route
               path={APP_ROUTE.bookHotel}
               element={
-                <UnprotectedRoutes>
+                <UserProtectedRoutes>
                   <Suspense fallback={<Loader />}>
                     <BookHotel />
                   </Suspense>
-                </UnprotectedRoutes>
+                </UserProtectedRoutes>
               }
             />
             <Route

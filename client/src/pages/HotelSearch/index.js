@@ -24,6 +24,7 @@ const HotelSearch = () => {
   useEffect(() => {
     if (checkEffect.current) {
       checkEffect.current = false;
+      setisLoading(true)
       handleSearchByCity(state);
 
     }

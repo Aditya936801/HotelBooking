@@ -107,7 +107,7 @@ const HotelForm = ({ maxRoom, price ,id}) => {
       </Typography>
       {amount !== 0 && (
         <Typography sx={{ mt: 4 }} variant="h6" color="primary">
-          Total Amount :- Rs{amount}{" "}
+          Total Amount : Rs{amount}{" "}
         </Typography>
       )}
       {amount !== 0 && (

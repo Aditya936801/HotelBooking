@@ -8,6 +8,7 @@ import {setSnackbar} from "../../store/global/globalReducer"
 import { useDispatch } from 'react-redux'
 import Loader from "../../components/Loader"
 import NotFound from "../../components/NotFound"
+import { isArray } from 'lodash'
 
 const MyBooking = () => {
   const [isLoading,setIsLoading] = useState(false)
@@ -20,7 +21,9 @@ const MyBooking = () => {
     try {
       setIsLoading(true)
       const response = await get_booking(user?._id,token);
-      setBookingdata(response?.data)
+      if(isArray(response.data)) {
+        setBookingdata(response?.data?.reverse())
+      }
     } catch (err) {
       dispatch(
         setSnackbar({
