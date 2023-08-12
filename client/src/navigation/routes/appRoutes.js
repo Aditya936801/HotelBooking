@@ -3,5 +3,6 @@ export const APP_ROUTE = {
     myBookings:"/my-bookings",
     searchHotel:"/search-hotel",
     bookHotel:"/book-hotel",
+    dashBoard:"/admin/dashBoard"
     
 }

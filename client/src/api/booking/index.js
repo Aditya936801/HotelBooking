@@ -9,22 +9,22 @@ const endpoints ={
 }
 
 
-export const create_booking = async(value)=>{
+export const create_booking = async(value,token)=>{
     
 
-      const response = await axios.post(BASE_URL + endpoints.createBooking,value);
+      const response = await axios.post(BASE_URL + endpoints.createBooking,value,{headers:{Authorization:`Bearer ${token}`}});
     return response
 
 }
-export const get_booking = async(value)=>{
+export const get_booking = async(value,token)=>{
 
-      const response = await axios.get(BASE_URL + endpoints.getBooking,{headers:{id:value}});
+      const response = await axios.get(BASE_URL + endpoints.getBooking,{headers:{id:value,Authorization:`Bearer ${token}`}});
     return response
 
 }
-export const cancel_booking = async(value)=>{
+export const cancel_booking = async(value,token)=>{
 
-      const response = await axios.get(BASE_URL + endpoints.cancelBooking+value);
+      const response = await axios.get(BASE_URL + endpoints.cancelBooking+value,{headers:{Authorization:`Bearer ${token}`}});
     return response
 
 }

@@ -8,6 +8,8 @@ import { setSnackbar } from "../../store/global/globalReducer";
 import { debounce } from "lodash";
 import HotelResult from "./miniComponent/HotelResult"
 import Loader from "../../components/Loader";
+import { useSelector } from "react-redux";
+import {getToken} from "../../store/auth/authSelector"
 
 const HotelSearch = () => {
   const { state } = useLocation();
@@ -16,6 +18,8 @@ const HotelSearch = () => {
   const [isLoading,setisLoading] = useState(false)
   const dispatch = useDispatch();
   const checkEffect = useRef(true);
+  const token =useSelector(getToken)
+
 
   useEffect(() => {
     if (checkEffect.current) {
@@ -70,7 +74,7 @@ const HotelSearch = () => {
 
   return (
     <div className="hotel-search-wrapper">
-      <SearchBar query={query} handleSearch={handleSearch} />
+      <SearchBar placeholder="Search Cities...." query={query} handleSearch={handleSearch} />
       { isLoading ? <Loader/>:<HotelResult query={query} data={data} />
         
       }

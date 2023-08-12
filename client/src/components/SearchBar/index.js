@@ -4,14 +4,14 @@ import BedroomParentIcon from '@mui/icons-material/BedroomParent';
 import "./searchBar.css"
 
 const SearchBar = (props) => {
-  const {handleSearch,query} = props
+  const {placeholder,handleSearch,query} = props
   return (
     <div className="search-bar">
     <TextField
     autoFocus
     label="Search"
     fullWidth
-    placeholder="Search City.... "
+    placeholder={placeholder}
     value={query}
     onChange={handleSearch}
     InputProps={{

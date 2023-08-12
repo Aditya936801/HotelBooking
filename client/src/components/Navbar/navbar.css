@@ -7,6 +7,8 @@
     justify-content: space-between;
 }
 
+
+
 .nav-link-text {
     text-decoration: none;
     color: white;
@@ -30,9 +32,10 @@
 
 }
 
+
 @media only screen and (max-width: 600px) {
     .nav-links {
-        max-width: 190px;
+        max-width: 160px;
     }
      
 

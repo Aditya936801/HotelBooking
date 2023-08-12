@@ -1,16 +1,12 @@
-import { Typography, Box, Button } from "@mui/material";
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setSnackbar } from "../../../store/global/globalReducer";
-import { setLogin } from "../../../store/auth/authReducer";
+import { Typography, Box } from "@mui/material";
+import { useState } from "react";
 import "../login.css";
-import { useNavigate } from "react-router-dom";
-import { AUTH_ROUTE } from "../../../navigation/routes/authRoutes";
+
+
 import Form from "../miniComponent/Form";
 
 const UserLogin = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+ 
   const [pageType, setPageType] = useState("login");
   const handlePageType = () => {
     if (pageType === "login") {

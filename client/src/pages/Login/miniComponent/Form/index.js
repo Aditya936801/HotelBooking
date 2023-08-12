@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { setSnackbar } from "../../../../store/global/globalReducer";
 import { useDispatch } from "react-redux";
 import {useNavigate} from "react-router-dom"
-import { user_register, user_login } from "../../../../api/auth/auth";
+import { user_register, user_login,admin_login } from "../../../../api/auth/auth";
 import {setLogin} from "../../../../store/auth/authReducer"
 import {APP_ROUTE} from "../../../../navigation/routes/appRoutes"
 
@@ -41,7 +41,7 @@ const checkValidation = (value) => {
 };
 
 const Form = (props) => {
-  const { pageType = "login",setPageType } = props;
+  const { pageType = "login",setPageType,isAdmin=false } = props;
   const [isloading, setIsLoading] = useState(false);
   const [value, setValue] = useState(
     DEFAULT_FORM_DATA
@@ -84,9 +84,15 @@ const Form = (props) => {
     }
   };
   const handleLogin = async (values) => {
-    
     try {
-      const response = await user_login(values);
+      let response
+      if(isAdmin){
+      response = await admin_login(values);
+      }
+      else{
+      response = await user_login(values);
+
+      }
       
       dispatch(
         setSnackbar({
@@ -99,11 +105,11 @@ const Form = (props) => {
       );
       dispatch(
         setLogin({
-          user: response?.data.user,
+          user: isAdmin?response?.data.admin:response?.data.user,
           token: response?.data.token,
         })
       );
-      navigate(APP_ROUTE.homeScreen)
+      navigate(isAdmin?APP_ROUTE.dashBoard:APP_ROUTE.homeScreen)
     } catch (err) {
       console.log(err)
       dispatch(
@@ -146,7 +152,7 @@ const Form = (props) => {
         sx={{ fontSize: { xs: "30px", sm: "40px" }, mb: 3 }}
         color="primary"
       >
-        {isLoginPage ? "Sign In" : "Sign Up"}
+        {isAdmin?"Admin Login":isLoginPage ? "Sign In" : "Sign Up"}
       </Typography>
       {!isLoginPage && (
         <TextField
@@ -176,6 +182,7 @@ const Form = (props) => {
         name="password"
         required
         label="Password"
+        type="password"
         onChange={handleChange(DATA.PASSWORD)}
         value={value[DATA.PASSWORD]}
         helperText={validation[DATA.PASSWORD]}

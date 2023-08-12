@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./bookingCard.css";
-import { Box, Button, useMediaQuery } from "@mui/material";
+import { Box,  useMediaQuery } from "@mui/material";
 import { cancel_booking } from "../../../../api/booking";
 import { setSnackbar } from "../../../../store/global/globalReducer";
 import { useDispatch } from "react-redux";
 import { LoadingButton } from "@mui/lab";
+import {getToken} from "../../../../store/auth/authSelector"
+import {useSelector} from "react-redux"
+
 
 const BookingCard = (props) => {
   const { data } = props;
@@ -13,10 +16,12 @@ const BookingCard = (props) => {
   const cancel = data?.status === "inactive"
   const [cancelled,setCancelled] = useState(cancel)
   const dispatch = useDispatch();
+  const token = useSelector(getToken)
+
   const cancelBooking = async () => {
     try {
       setIsLoading(true);
-      const response = await cancel_booking(data?._id);
+      const response = await cancel_booking(data?._id,token);
       setCancelled(true)
     } catch (err) {
       dispatch(

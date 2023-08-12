@@ -12,8 +12,9 @@ import {useNavigate} from "react-router-dom"
 import { useDispatch } from "react-redux";
 import {create_booking} from "../../../../api/booking"
 import {APP_ROUTE} from "../../../../navigation/routes/appRoutes"
-import { getUserData } from "../../../../store/auth/authSelector";
+import { getUserData,getToken } from "../../../../store/auth/authSelector";
 import {useSelector} from "react-redux"
+
 
 
 
@@ -25,6 +26,7 @@ const HotelForm = ({ maxRoom, price ,id}) => {
       key: "selection",
     },
   ]);
+  const token =useSelector(getToken)
   const user = useSelector(getUserData);
 
   const [amount, setAmount] = useState(0);
@@ -56,7 +58,7 @@ const HotelForm = ({ maxRoom, price ,id}) => {
         room
       }
 
-      const response = await create_booking(value);
+      const response = await create_booking(value,token);
       navigate(APP_ROUTE.myBookings)
 
     } catch (err) {

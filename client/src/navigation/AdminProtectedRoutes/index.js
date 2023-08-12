@@ -2,9 +2,11 @@ import React from 'react'
 import {useSelector} from "react-redux"
 import { getUserData, getToken } from "../../store/auth/authSelector";
 import { Navigate } from 'react-router-dom';
-import { APP_ROUTE } from '../routes/appRoutes';
+import { AUTH_ROUTE } from "../routes/authRoutes";
 
-const UnprotectedRoute = ({children}) => {
+
+
+const AdminProtectedRoute = ({children}) => {
   const token = useSelector(getToken);
   const user = useSelector(getUserData);
   const isAuth = token !== ""
@@ -12,13 +14,13 @@ const UnprotectedRoute = ({children}) => {
   {
     if(user?.isAdmin)
     {
-        return <Navigate to={APP_ROUTE.dashBoard} />
+      return children
     }
     else{
-        return <Navigate to={APP_ROUTE.homeScreen} />
+        return <Navigate to={AUTH_ROUTE.adminLogin} />
     }
   }
-  return children
+  return <Navigate to={AUTH_ROUTE.adminLogin} />
 }
 
-export default UnprotectedRoute
+export default AdminProtectedRoute

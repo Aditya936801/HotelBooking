@@ -40,7 +40,7 @@ export const userLogin = async(req,res)=>{
         const isMatch = await bcrypt.compare(password,user.password)
         if(!isMatch) return res.status(400).json({message:"Invalid Credential"})
 
-        const token = jwt.sign({id : user._id},process.env.ADMIN_JWT_SECRET)
+        const token = jwt.sign({id : user._id},process.env.JWT_SECRET)
         delete user.password
      
       
@@ -62,11 +62,11 @@ export const adminLogin = async(req,res)=>{
         const isMatch = await bcrypt.compare(password,admin.password)
         if(!isMatch) return res.status(400).json({message:"Invalid Credential"})
 
-        const token = jwt.sign({id : admin._id},process.env.JWT_SECRET)
+        const token = jwt.sign({id : admin._id},process.env.ADMIN_JWT_SECRET)
         delete admin.password
-        const userDetail = {...admin,isAdmin:true}
+        
 
-        res.status(200).json({token,userDetail,message:"Login Successful"})
+        res.status(200).json({token,admin,message:"Login Successful"})
     }
     catch(err)
     {
