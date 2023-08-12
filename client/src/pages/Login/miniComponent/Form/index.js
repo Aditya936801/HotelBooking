@@ -122,6 +122,8 @@ const Form = (props) => {
           },
         })
       );
+    } finally {
+      setIsLoading(false);
     } 
   };
 
