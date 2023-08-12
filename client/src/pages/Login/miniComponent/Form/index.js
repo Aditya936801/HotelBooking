@@ -141,7 +141,6 @@ const Form = (props) => {
       } else {
         setValidation(DEFAULT_FORM_DATA);
         setIsLoading(true);
-        setValue(DEFAULT_FORM_DATA)
         handleRegistration(value);
       }
     }
