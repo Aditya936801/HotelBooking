@@ -11,12 +11,11 @@ import bookingRoutes from "./routes/booking.js"
 /* Configuration */ 
 dotenv.config()
 const app = express()
-app.use(express.json())
 app.use(helmet())
 app.use(helmet.crossOriginResourcePolicy({policy:"cross-origin"}))
 app.use(morgan("common"))
-app.use(express.json({extended:true}))
-app.use(express.urlencoded({extended:true}))
+app.use(express.json({limit:"100mb",extended:true}))
+app.use(express.urlencoded({limit:"100mb",extended:true}))
 app.use(cors())
 
 

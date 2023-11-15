@@ -9,9 +9,7 @@ import Loader from "../../../components/Loader"
 
 import {
   TextField,
-  Button,
-  
- 
+  Button
 } from "@mui/material";
 import * as yup from "yup";
 import "./hotelForm.css";
@@ -45,16 +43,14 @@ const HotelForm = (props) => {
   };
 
   const  handleImageChange = async(e)=>{
- 
-    const file = e?.target?.files[0];
-    const i = await base64(file);
-    setImage(i)
-
+    const file = e.target.files[0];
+      const i = await base64(file);
+      setImage(i)
   }
 
   const operationAdmin = async (row) => {
     try {
-      console.log(row)
+      
         setIsLoading(true)
       const response = modalType === "edit" ? await update_hotel(row,token) : await create_hotel(row,token);
       getHotels();
@@ -70,13 +66,12 @@ const HotelForm = (props) => {
         )
       } 
      catch (err) {
-     
-
+      console.log(err)
         dispatch(
           setSnackbar({
             snackbar: {
               open: true,
-              message: err?.response?.data?.message,
+              message: err?.response?err?.response?.data?.message:"Something Went Wrong",
               severity: "error",
             },
           })
@@ -92,7 +87,7 @@ const HotelForm = (props) => {
       operationAdmin({...values,image});
      
     } else {
-      operationAdmin({ ...values, _id: rowData?._id });
+      operationAdmin({ ...values, _id: rowData?._id,image:rowData?.image });
     }
     onSubmitProps.resetForm();
   };
@@ -122,7 +117,7 @@ const HotelForm = (props) => {
             value={values?.hotelName}
             name="hotelName"
             error={Boolean(touched.hotelName) && Boolean(errors.hotelName)}
-            helperText={touched.hotelName && errors.hotelName}
+            helpertext={touched.hotelName && errors.hotelName}
             required
             label="Hotel Name"
             className="form-textfield"
@@ -133,7 +128,7 @@ const HotelForm = (props) => {
             value={values?.location}
             name="location"
             error={Boolean(touched.location) && Boolean(errors.location)}
-            helperText={touched.location && errors.location}
+            helpertext={touched.location && errors.location}
             required
             label="Location"
             className="form-textfield"
@@ -145,7 +140,7 @@ const HotelForm = (props) => {
             value={values?.maxRoom}
             name="maxRoom"
             error={Boolean(touched.maxRoom) && Boolean(errors.maxRoom)}
-            helperText={touched.maxRoom && errors.maxRoom}
+            helpertext={touched.maxRoom && errors.maxRoom}
             required
             label="Maximum rooms"
             className="form-textfield"
@@ -157,7 +152,7 @@ const HotelForm = (props) => {
             value={values?.maxPerson}
             name="maxPerson"
             error={Boolean(touched.maxPerson) && Boolean(errors.maxPerson)}
-            helperText={touched.maxPerson && errors.maxPerson}
+            helpertext={touched.maxPerson && errors.maxPerson}
             required
             label="Maximum Person In one Room"
             className="form-textfield"
@@ -169,7 +164,7 @@ const HotelForm = (props) => {
             value={values?.price}
             name="price"
             error={Boolean(touched.price) && Boolean(errors.price)}
-            helperText={touched.price && errors.price}
+            helpertext={touched.price && errors.price}
             required
             label="Price"
             className="form-textfield"
@@ -183,27 +178,19 @@ const HotelForm = (props) => {
 
             name="description"
             error={Boolean(touched.description) && Boolean(errors.description)}
-            helperText={touched.description && errors.description}
+            helpertext={touched.description && errors.description}
             required
             label="Description"
             className="form-textfield"
 
           />
           <input
-            onBlur={handleBlur}
-            onChange={handleImageChange}
-           
-            name="image"
-            error={Boolean(touched.image) && Boolean(errors.image)}
-            helperText={touched.image && errors.image}
-            required
-            
+          onChange={handleImageChange}
+          name="image"
+            required ={modalType==="edit"?false:true}
             type="file"
             className="form-textfield"
-
           />
-        
-
           
 
           <Button type="submit" variant="contained">

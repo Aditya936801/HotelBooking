@@ -16,9 +16,12 @@ export const createHotel = async (req, res) => {
     if (preHotel) {
       res.status(400).json({ message: "Hotel Already exist" });
     }
-    const hotel = new Hotel(req.body);
-    const savedHotel = await hotel.save();
-    res.status(201).json({savedHotel, message: "Hotel Added " });
+    else{
+
+      const hotel = new Hotel(req.body);
+      const savedHotel = await hotel.save();
+      res.status(201).json({savedHotel, message: "Hotel Added " });
+    }
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -27,7 +30,7 @@ export const createHotel = async (req, res) => {
 export const updateHotel = async (req, res) => {
   try {
     const { _id,hotelName,location } =req.body;
-    console.log(req.body)
+    
     const preHotel = await Hotel.findOne({
       $and: [
         {
